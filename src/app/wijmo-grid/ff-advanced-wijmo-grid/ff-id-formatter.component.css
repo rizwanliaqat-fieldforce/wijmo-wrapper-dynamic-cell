@@ -1,0 +1,98 @@
+.view-all-projects {
+  color: #377db8;
+}
+
+.scrollX {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+}
+
+.scrollX::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid #b1b4b6;
+}
+
+.scrollX::-webkit-scrollbar {
+  height: 8px;
+  background-color: #fff;
+}
+
+.scrollX::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #12202b;
+}
+
+.scrollX .scroll-list {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.scrollX .scroll-list .list-container {
+  min-width: 325px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.scrollY {
+  overflow-x: hidden;
+  padding-right: 10px;
+  overflow-y: auto;
+}
+
+.scrollY::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid #b1b4b6;
+}
+
+.scrollY::-webkit-scrollbar {
+  width: 8px;
+  background-color: #fff;
+}
+
+.scrollY::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #12202b;
+}
+
+.scrollY.scrollX {
+  overflow-x: auto;
+}
+
+.all-projects-list {
+  background-color: #f3f7fa;
+  position: absolute;
+  top: calc(100% + 10px);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.all-projects-list ul {
+  list-style: none outside none;
+  padding: 0;
+  margin: 0;
+}
+
+.all-projects-list ul li {
+  padding: 4px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.all-projects-list.active {
+  top: calc(100% - 10px);
+  opacity: 1;
+  z-index: 3;
+  visibility: visible;
+}

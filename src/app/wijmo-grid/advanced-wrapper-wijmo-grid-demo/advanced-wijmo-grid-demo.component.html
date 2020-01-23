@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="rowData && rowData.length > 0">
+    <ff-advanced-wijmo-grid 
+        [rowData]="rowData"  
+        [columnData]="colDefs"
+        [pagination]="true" 
+        [gridParent]="this"
+        (onChangeSorting)="onChangeSorting($event)"
+        [pageSize]="120">
+    </ff-advanced-wijmo-grid>
+</ng-container>
+<br/><br/>

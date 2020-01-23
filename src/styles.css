@@ -1,0 +1,25 @@
+/* Add application styles & imports to this file! */
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+body {
+  margin: 40px;
+}
+
+.wj-cell button {
+  width: 100%;
+  height: 100%
+}
+
+.custom-grid .wj-header.wj-cell {
+  background: #f3f7fa;
+}
+
+.custom-grid .wj-cell, .custom-grid .wj-cell.wj-alt {
+  background-color: cyan;
+
+    border: none;
+    border-bottom: 1px solid #c8dbeb;
+}
+
+  .custom-grid  .wj-content {
+    border: none;
+  }
