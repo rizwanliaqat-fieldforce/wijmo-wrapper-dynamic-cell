@@ -5,7 +5,7 @@
   [autoRowHeights]="true"
   [alternatingRowStep]="0"
   [(itemsSource)]="dataSource"
-
+(initialized)="initgrid(grid)"
   
   (sortingColumn)="sortingColumn(grid, $event)"
 
@@ -24,7 +24,7 @@
   (updatingLayout)="updatingLayout(grid, $event)"
   (updatingView)="updatingView(grid, $event)" -->
   <ng-container *ngFor="let col of colums.items">
-    <ng-container *ngIf="!col.customCell; else customCell">
+    <ng-container>
       <wj-flex-grid-column
         [header]="col.header"
         [binding]="col.binding"
@@ -33,23 +33,6 @@
         [width]="col.width"
       ></wj-flex-grid-column>
     </ng-container>
-
-    <ng-template #customCell>
-      <wj-flex-grid-column
-        [header]="col.header"
-        [width]="col.width"
-        [binding]="col.binding"
-        [allowSorting]="col.allowSorting"
-      >
-        <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-          <!-- <ng-container *ngComponentOutlet="col.customCell; injector: createInjector(cell); "></ng-container> -->
-          <wj-component-loader
-            [component]="col.customCell"
-            [properties]="{ context: { cell: cell, gridParent: gridParent } }"
-          ></wj-component-loader>
-        </ng-template>
-      </wj-flex-grid-column>
-    </ng-template>
   </ng-container>
 </wj-flex-grid>
 

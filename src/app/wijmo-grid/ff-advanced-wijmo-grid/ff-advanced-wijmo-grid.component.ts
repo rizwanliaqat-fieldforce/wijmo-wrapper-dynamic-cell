@@ -10,13 +10,17 @@ import {
   SimpleChanges,
   OnChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+    EmbeddedViewRef,
+  ComponentFactoryResolver,
+  ApplicationRef
 } from "@angular/core";
 
 import { CollectionView, EventArgs, SortDescription } from "wijmo/wijmo";
 import * as wjcGrid from "wijmo/wijmo.grid";
 import { FlexGridFilter, FilterType } from "wijmo/wijmo.grid.filter";
 import { FlexGrid, CellType } from "wijmo/wijmo.grid";
+import { DynamicData } from "../../models/DynamicData";
 
 let sort = {
   col: null,
@@ -50,7 +54,7 @@ export class FFAdvancedWijmoGridComponent implements OnInit, OnChanges {
   @ViewChild("grid") grid: FlexGrid;
   @ViewChild("filter", null) filter: FlexGridFilter;
 
-  constructor(public paramsInjector: Injector) {
+  constructor(public paramsInjector: Injector, public componentFactoryResolver: ComponentFactoryResolver, public appRef: ApplicationRef) {
     console.log("ctor - ff advanced wijmo grid");
     this.colums = new CollectionView();
     this.pageSize = 10;
@@ -76,6 +80,27 @@ export class FFAdvancedWijmoGridComponent implements OnInit, OnChanges {
     });
 
     this.filter.filterColumns = filterCols;
+  }
+
+  initgrid(grid) {
+    let _oldUpdate = grid.cellFactory.updateCell;
+    grid.cellFactory.updateCell = this.updateCell(_oldUpdate);
+  }
+
+  updateCell(_oldUpdate: Function) {
+    var self = this;
+    var handler = function(panel, row, col, cell, rng, updateContent) {
+      _oldUpdate.call(this, panel, row, col, cell, rng, updateContent);
+      if(panel.cellType === wjcGrid.CellType.Cell && self.columnData[col].customCell) {
+        cell.innerHTML = '';
+        var component = self.columnData[col].customCell;
+        const factory = self.componentFactoryResolver.resolveComponentFactory(component);
+        var item = panel.rows[row].dataItem;
+        const viewRef = factory.create(self.createInjector(item));
+        cell.appendChild((viewRef.hostView as EmbeddedViewRef<any>).rootNodes[0]);
+      }
+    }
+    return handler;
   }
 
   ngOnChanges(changes: SimpleChanges) {
