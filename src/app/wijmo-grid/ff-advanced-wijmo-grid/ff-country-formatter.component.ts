@@ -2,12 +2,9 @@ import {Component, Input, Inject} from '@angular/core';
 
 
 @Component({
-  selector: 'ff-id-formatter-cell',
+  selector: 'ff-country-formatter-cell',
   template: `
-     <a  href="javascript:void(0);"  (click)="triggerAllProject($event)" class="view-all-projects">View All</a>
-    <div class="all-projects-list scrollY" style="max-height: 160px;color: black;">
-        {{ context.cell.item.country}}
-    </div>
+    hello
   `,
   styleUrls: ['./ff-id-formatter.component.css']
  //providers: [DynamicData]
