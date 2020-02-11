@@ -1,24 +1,22 @@
-import {Component, Input, Inject} from '@angular/core';
-
+import {Component, Input, Inject, OnInit} from '@angular/core';
 
 @Component({
   selector: 'ff-country-formatter-cell',
   template: `
-    hello
+    {{ site.country }}
   `,
-  styleUrls: ['./ff-id-formatter.component.css']
- //providers: [DynamicData]
+  styleUrls: ['./ff-id-formatter.component.css'],
 })
-export class FFCountryFormatterComponent {
+export class FFCountryFormatterComponent implements OnInit {
 //  projectsLists: any =  "one, two, three, four".split(',');
    @Input() context: any;
-  constructor() {
+   public get site() {
+     return this.context.cell.item;
+   }
+
+  constructor() { 
     //console.log("FF Number Formatter Component ctor");
   }
-
-      public get projectsLists() {
-        return Object.keys(this.context.cell.item);
-    }
 
 clearSearch(e) {
   console.log("anchor clicked", e);
@@ -31,7 +29,8 @@ clearSearch(e) {
     }
 
   ngOnInit() {
-  // console.log("FF Number Formatter Component on init");
+  //  debugger;
+   //console.log(this.context.cell.item);
   }
 
    ngOnDestroy() {

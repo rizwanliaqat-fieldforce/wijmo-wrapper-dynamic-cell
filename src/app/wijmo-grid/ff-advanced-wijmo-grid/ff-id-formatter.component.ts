@@ -1,24 +1,25 @@
 import {Component, Input, Inject} from '@angular/core';
 
-import { DynamicData } from "../../models/DynamicData";
-
 @Component({
   selector: 'ff-id-formatter-cell',
   template: `
-{{ site.country }}
+  
+{{ site.id }}
   `,
   styleUrls: ['./ff-id-formatter.component.css'],
- //providers: [DynamicData]
+
 })
 export class FFIdFormatterComponent {
-  // value types also not binding
-  //
-  public site = 'USA';
-//  projectsLists: any =  "one, two, three, four".split(',');
-  constructor(@Inject(DynamicData) public params: any) {
-    console.log(params);
+
+@Input() context: any;
+   public get site() {
+     return this.context.cell.item;
+   }
+   
+  constructor() {
+   // console.log(params);
     // reference types also not rendering
-    this.site = params;
+    // this.site = params;
   }
 
 clearSearch(e) {
